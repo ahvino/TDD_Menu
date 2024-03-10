@@ -1,6 +1,7 @@
 /*
 * Author:  Selik Samai
 * Date:  03/10/2024
+* MS 549 Data Structures and Testing
 * Program:  TDD_Menu.cpp
 *   Overview
 *       Write a program that has a menu with 3 items, the 3rd is exit.  Have items 1 and 2 do something constructive and utilize contitionals (if/else statements)   utilizing the Test Driven Development process.

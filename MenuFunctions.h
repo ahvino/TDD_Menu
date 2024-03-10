@@ -1,3 +1,4 @@
+#define NDEBUG
 #pragma once
 
 #include <iostream>
@@ -6,6 +7,9 @@
 #include <thread>
 #include <regex>
 #include <ctype.h>
+#include <cassert>
+#include <time.h>
+
 
 bool ValidStudentID(std::string stuId)
 {
@@ -52,6 +56,16 @@ std::string SetStudentID()
     return ID;
 }
 
+
+bool ValidName(std::string name)
+{
+    bool isValid = false;
+
+    if (name.size() > 0 && name != "0") { isValid = true; }
+
+    return isValid;
+}
+
 /// <summary>
 /// Function for setting the students name
 /// </summary>
@@ -62,7 +76,7 @@ std::string SetStudentName(bool & isValid)
     std::cout << "Enter your name or type '0' to go back to the main menu: ";
     std::getline(std::cin, name);
 
-    if (name.size() > 0 && name != "0")
+    if (ValidName(name))
     {
         isValid = true;
         std::cout << "Thanks, " << name << "!" << std::endl;
@@ -78,6 +92,78 @@ std::string SetStudentName(bool & isValid)
     }
 
     return name;
+}
+
+
+void TestValidId()
+{
+    std::cout << "Running Test 'TestValidId'..." << std::endl;
+
+    assert(ValidStudentID("123456") == true);
+    std::cout << " Test 'TestValidID' with '123456' passed!" << std::endl;
+}
+
+void TestInvalidId()
+{
+    std::cout << "Running Test 'TestInvalidId'..." << std::endl;
+
+    assert(ValidStudentID("123") == true);
+    std::cout << "Test 'TestInvalidId' with '123' failed!" << std::endl;
+
+}
+
+
+void TestValidName()
+{
+    std::cout << "Running Test 'TestValidName'..." << std::endl;
+
+    assert(ValidName("tester") == true);
+    std::cout << "Test 'TestValidName' with 'tester' passed!" << std::endl;
+
+}
+
+
+void TestInvalidName()
+{
+    std::cout << "Running Test 'TestInvalidName'..." << std::endl;
+
+    assert(ValidName("") == true);
+    std::cout << "Test 'TestInvalidName' with '' failed!" << std::endl;
+
+}
+
+void RunRandomUnitTest()
+{
+    srand(time(NULL));
+
+    int randomNum;
+    randomNum = rand() % 4 + 1;
+
+
+    switch (randomNum)
+    {
+    case 1:
+        TestValidId();
+
+        break;
+    case 2:
+        TestInvalidId();
+
+        break;
+    case 3:
+        TestValidName();
+
+        break;
+    case 4: 
+        TestInvalidName();
+
+        break;
+    default: 
+        TestInvalidName();
+
+        break;
+    }
+
 }
 
 void MainMenu(std::string & studentID, std::string & student)
@@ -97,17 +183,19 @@ void MainMenu(std::string & studentID, std::string & student)
     }
     std::cout << menu << std::endl;
     std::cout << "Enter menu option: " << std::endl;
-    std::cout << "1. Enter Name \n2. Student ID# \n3. Exit \n" << std::endl;
+    std::cout << "1. Enter Name \n2. Student ID# \n3. Run Unit Tests\n4. Exit \n" << std::endl;
 
     std::string menuVal;
     std::cout << "Option: ";
     std::getline(std::cin, menuVal);
-
-    int val = std::stoi(menuVal);
-
-
-    switch (val)
+    
+    int val;
+    if (menuVal.size() > 0)
     {
+        val = std::stoi(menuVal);
+
+        switch (val)
+        {
         case 1:
             bool validName;
             menu = "MAIN MENU";
@@ -119,6 +207,16 @@ void MainMenu(std::string & studentID, std::string & student)
             studentID = SetStudentID();
             break;
         case 3:
+            std::cout << "Running Unit Tests..." << std::endl;
+            //TestValidId();
+            //TestValidName();
+            //TestInvalidName();
+            //TestInvalidName();
+            RunRandomUnitTest();
+
+            std::cout << "\n\n";
+            break;
+        case 4:
             std::cout << "Exiting program..." << std::endl;
             exit(EXIT_SUCCESS);
             break;
@@ -130,6 +228,8 @@ void MainMenu(std::string & studentID, std::string & student)
 
             system("CLS");
             break;
+        }
     }
-
 }
+
+
