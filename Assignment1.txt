@@ -1,0 +1,8 @@
+For this assignment I tried ad hoc testing as well as unit testing with specific values passed in
+I made sure to print the results of the test and added it as a menu option in my main menu. 
+The menu will randomly pick one of the unit tests to run and output the results. 
+
+I have experience with C++ but it's always good to go back to the basics and fundementals. 
+I think going forward, I'd like to incorporate this assignment into a GUI. I've looked at a few 
+and right now I'm leaning towards IMGUI which is one I've heard about before. I think 
+it'll be a good way to challenge myself going forward. 
