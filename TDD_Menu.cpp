@@ -24,17 +24,24 @@
 std::string SetStudentName()
 {
     std::string name = "";
-    std::cout << "Enter your name: ";
+    std::cout << "Enter your name or type '0' to go back to the main menu: ";
     std::getline(std::cin, name);
 
-    if (name.size() > 0)
+    if (name.size() > 0 && name != "0")
     {
-        std::cout<< ""
+        std::cout<< "Thanks, " << name << "!" << std::endl;
+    }
+    else if (name == "0")
+    {
+        system("CLS");
+        MainMenu();
     }
     else
     {
-
+        std::cout << "Looks like we didn't get a valid response. Please enter your name or enter '0' to go back to the main menu." <<std::endl;
     }
+
+
 
     return name;
 }
