@@ -21,6 +21,7 @@
 */
 
 #include "MenuFunctions.h"
+#include<memory>
 
 
 int main()
@@ -28,10 +29,21 @@ int main()
     std::string studentID = "";
     std::string student = "";
 
-    for (;;)
+    bool recursiveMenu = true;
+    std::unique_ptr<bool> rerun(&recursiveMenu);
+
+    MainMenu(studentID, student, *rerun);
+
+ 
+
+    if (recursiveMenu == false)
     {
-        MainMenu(studentID, student);
+        std::cout << "Successfully updated our pointer" << std::endl;
+
+        std::cout << "Exiting program..." << std::endl;
+        exit(EXIT_SUCCESS);
     }
+
 
     return 0;
 }

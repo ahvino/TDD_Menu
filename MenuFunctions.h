@@ -166,6 +166,33 @@ void RunRandomUnitTest()
 
 }
 
+void MenuPrompt()
+{
+    std::string studentID = "";
+    std::string student = "";
+
+    std::string studentInfo;
+    std::string menu;
+
+    if (student.size() > 0 && studentID.size() > 0)
+    {
+        studentInfo = "\n" + student + "   " + studentID + "\n";
+        menu = studentInfo + "MAIN MENU";
+    }
+    else
+    {
+        menu = "MAIN MENU";
+
+    }
+    std::cout << menu << std::endl;
+    std::cout << "Enter menu option: " << std::endl;
+    std::cout << "1. Enter Name \n2. Student ID# \n3. Run Unit Tests\n4. Exit \n" << std::endl;
+
+    std::string menuVal;
+    std::cout << "Option: ";
+    std::getline(std::cin, menuVal);
+}
+
 void MainMenu(std::string & studentID, std::string & student)
 {  
     std::string studentInfo;
@@ -208,10 +235,7 @@ void MainMenu(std::string & studentID, std::string & student)
             break;
         case 3:
             std::cout << "Running Unit Tests..." << std::endl;
-            //TestValidId();
-            //TestValidName();
-            //TestInvalidName();
-            //TestInvalidName();
+
             RunRandomUnitTest();
 
             std::cout << "\n\n";
@@ -232,4 +256,77 @@ void MainMenu(std::string & studentID, std::string & student)
     }
 }
 
+
+void MainMenu(std::string& studentID, std::string& student, bool & rerun)
+{
+    std::string studentInfo;
+    std::string menu;
+
+    //acts as base case to determine if we should stop executing
+    if (rerun == false)
+    {
+        return;
+    }
+
+    if (student.size() > 0 && studentID.size() > 0)
+    {
+        studentInfo = "\n" + student + "   " + studentID + "\n";
+        menu = studentInfo + "MAIN MENU";
+    }
+    else
+    {
+        menu = "MAIN MENU";
+
+    }
+    std::cout << menu << std::endl;
+    std::cout << "Enter menu option: " << std::endl;
+    std::cout << "1. Enter Name \n2. Student ID# \n3. Run Unit Tests\n4. Exit \n" << std::endl;
+
+    std::string menuVal;
+    std::cout << "Option: ";
+    std::getline(std::cin, menuVal);
+
+    int val;
+    if (menuVal.size() > 0)
+    {
+        val = std::stoi(menuVal);
+
+        switch (val)
+        {
+        case 1:
+            bool validName;
+            menu = "MAIN MENU";
+            student = SetStudentName(validName);
+
+
+            break;
+        case 2:
+            studentID = SetStudentID();
+            break;
+        case 3:
+            std::cout << "Running Unit Tests..." << std::endl;
+
+            RunRandomUnitTest();
+
+            std::cout << "\n\n";
+
+            break;
+        case 4:
+            rerun = false;
+            break;
+
+        default:
+            std::cout << "The menu option you entered was invalid, please try again with an appropriate menu option. " << std::endl;
+            std::cout << "\n\n...THIS SCREEN WILL CLEAR IN 5 SECONDS...";
+            std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+
+            system("CLS");
+            break;
+        }
+    }
+
+    //recursive function calls itself 
+    MainMenu(studentID, student, rerun);
+
+}
 
