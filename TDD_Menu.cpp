@@ -21,23 +21,21 @@
 */
 
 #include "MenuFunctions.h"
-#include "MergeSort.h"
-#include <memory>
-#include "TestData.h"
+#include<memory>
 
 
 
 int main()
-{   
+{
     std::string studentID = "";
     std::string student = "";
 
     bool recursiveMenu = true;
     std::unique_ptr<bool> rerun(&recursiveMenu);
 
+
     MainMenu(studentID, student, *rerun);
-
-
+    
     if (recursiveMenu == false)
     {
         std::cout << "Successfully updated our pointer" << std::endl;
@@ -45,8 +43,8 @@ int main()
         std::cout << "Exiting program..." << std::endl;
         exit(EXIT_SUCCESS);
     }
-
     
+
     return 0;
 }
 
