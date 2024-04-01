@@ -21,11 +21,14 @@
 */
 
 #include "MenuFunctions.h"
-#include<memory>
+#include "MergeSort.h"
+#include <memory>
+#include "TestData.h"
+
 
 
 int main()
-{
+{   
     std::string studentID = "";
     std::string student = "";
 
@@ -34,7 +37,6 @@ int main()
 
     MainMenu(studentID, student, *rerun);
 
- 
 
     if (recursiveMenu == false)
     {
@@ -44,7 +46,7 @@ int main()
         exit(EXIT_SUCCESS);
     }
 
-
+    
     return 0;
 }
 

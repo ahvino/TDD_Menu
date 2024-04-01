@@ -131,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuFunctions.h" />
+    <ClInclude Include="MergeSort.h" />
+    <ClInclude Include="SelectionSort.h" />
+    <ClInclude Include="TestData.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assignment1.txt" />

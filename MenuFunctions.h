@@ -1,6 +1,7 @@
 #define NDEBUG
 #pragma once
 
+#include "TestData.h"
 #include <iostream>
 #include <string>
 #include <stdlib.h>
@@ -168,6 +169,7 @@ void RunRandomUnitTest()
 
 void MenuPrompt()
 {
+    
     std::string studentID = "";
     std::string student = "";
 
@@ -257,6 +259,7 @@ void MainMenu(std::string & studentID, std::string & student)
 }
 
 
+
 void MainMenu(std::string& studentID, std::string& student, bool & rerun)
 {
     std::string studentInfo;
@@ -276,17 +279,20 @@ void MainMenu(std::string& studentID, std::string& student, bool & rerun)
     else
     {
         menu = "MAIN MENU";
-
     }
+
     std::cout << menu << std::endl;
     std::cout << "Enter menu option: " << std::endl;
-    std::cout << "1. Enter Name \n2. Student ID# \n3. Run Unit Tests\n4. Exit \n" << std::endl;
+    std::cout << "1. Enter Name \n2. Student ID# \n3. Run Unit Tests \n4. Selection sort on 100 rand numbers. "
+        "\n5. Merge Sort on 100 random numbers. \n6. Selection sort with times. \n7. Merge Sort with times\n8. Exit \n" << std::endl;
 
     std::string menuVal;
     std::cout << "Option: ";
     std::getline(std::cin, menuVal);
 
     int val;
+    int* arrayToSort = new int[100];
+
     if (menuVal.size() > 0)
     {
         val = std::stoi(menuVal);
@@ -297,8 +303,6 @@ void MainMenu(std::string& studentID, std::string& student, bool & rerun)
             bool validName;
             menu = "MAIN MENU";
             student = SetStudentName(validName);
-
-
             break;
         case 2:
             studentID = SetStudentID();
@@ -312,6 +316,52 @@ void MainMenu(std::string& studentID, std::string& student, bool & rerun)
 
             break;
         case 4:
+            std::cout << "Running selection sort on 100 random numbers and printing result..." << std::endl;
+            
+            srand(time(NULL));
+
+            for (int i = 0; i < 100; i++)
+            {
+                arrayToSort[i] = rand() % 100;
+            }
+            std::cout << "Pre sorted array..." << std::endl;
+
+            PrintArray(arrayToSort, 100);
+            SelectionSort(arrayToSort, 100);
+            std::cout << "Post sorted array..." << std::endl;
+
+            PrintArray(arrayToSort, 100);
+            
+            break;
+
+        case 5: 
+            std::cout << "Running merge sort on 100 random numbers and printing result..." << std::endl;
+
+            srand(time(NULL));
+
+            for (int i = 0; i < 100; i++)
+            {
+                arrayToSort[i] = rand() % 100;
+            }
+            std::cout << "Pre sorted array..." << std::endl;
+
+            PrintArray(arrayToSort, 100);
+            MergeSort(arrayToSort,0, 100-1);
+            std::cout << "Post sorted array..." << std::endl;
+
+            PrintArray(arrayToSort, 100);
+            break;
+        case 6:
+            std::cout << "Running selection sort unit tests and printing durations..." << std::endl;
+            RunSelectionSortsTests();
+            break;
+
+        case 7: 
+            std::cout << "Running merge sort unit tests and printing results..." << std::endl;
+            RunMergeSortsTests();
+            break;
+
+        case 8:
             rerun = false;
             break;
 
@@ -324,6 +374,8 @@ void MainMenu(std::string& studentID, std::string& student, bool & rerun)
             break;
         }
     }
+
+
 
     //recursive function calls itself 
     MainMenu(studentID, student, rerun);
