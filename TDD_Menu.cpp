@@ -21,11 +21,11 @@
 */
 
 #include "MenuFunctions.h"
-#include<memory>
+#include <memory>
+#include "MyLinkedList.h"
+#include "Stack.h"
 
-
-
-int main()
+void StartMenu()
 {
     std::string studentID = "";
     std::string student = "";
@@ -35,7 +35,7 @@ int main()
 
 
     MainMenu(studentID, student, *rerun);
-    
+
     if (recursiveMenu == false)
     {
         std::cout << "Successfully updated our pointer" << std::endl;
@@ -43,7 +43,27 @@ int main()
         std::cout << "Exiting program..." << std::endl;
         exit(EXIT_SUCCESS);
     }
+}
+
+void CheckLists()
+{
+    std::cout << "Starting stack..." << std::endl;
+    Stack stack;
+    stack.Push(5);
+    stack.Push(7);
+    stack.Push(9);
+    stack.Push(3);
+    stack.Pop();
     
+    std::cout << "Ending linked list..." << std::endl;
+
+}
+
+int main()
+{
+    //StartMenu();
+
+    CheckLists();
 
     return 0;
 }
