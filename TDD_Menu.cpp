@@ -54,7 +54,7 @@ void CheckLists()
     stack.Push(9);
     stack.Push(3);
     stack.Pop();
-    
+    stack.Print();
     std::cout << "Ending linked list..." << std::endl;
 
 }

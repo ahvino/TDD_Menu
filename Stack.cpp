@@ -74,8 +74,10 @@ void Stack::Remove(int val)
 
 void Stack::Print()
 {
-    while (head != nullptr)
+    Node* curr = tail;
+    while (curr != nullptr)
     {
-        std::cout << head->data << " ";
+        std::cout << curr->data << " ";
+        curr = tail->prev;
     }
 }
