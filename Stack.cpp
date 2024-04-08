@@ -78,6 +78,6 @@ void Stack::Print()
     while (curr != nullptr)
     {
         std::cout << curr->data << " ";
-        curr = tail->prev;
+        curr = curr->prev;
     }
 }
