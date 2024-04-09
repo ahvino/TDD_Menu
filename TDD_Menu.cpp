@@ -53,9 +53,10 @@ void CheckLists()
     stack.Push(7);
     stack.Push(9);
     stack.Push(3);
-    stack.Pop();
+
     stack.Print();
-    std::cout << "Ending linked list..." << std::endl;
+
+    std::cout << "Ending Stack..." << std::endl;
 
 }
 
@@ -64,6 +65,7 @@ int main()
     //StartMenu();
 
     CheckLists();
+
 
     return 0;
 }

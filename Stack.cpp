@@ -21,18 +21,37 @@ void Stack::Push(int val)
     if (head == nullptr)
     {
         head = NewNode;
-        head->prev = nullptr;
+        //head->prev = nullptr;
         tail = head;
-
+        //head->next = tail->next;
     }
     else
     {
-        
-        tail->next = NewNode;
-        NewNode->prev = tail;
+        // LIFO order for stack
+        // 5 = 7 = 9 = x
+
+        //keep track of current tail before inserting new node
+        Node* prevTail = tail;
         tail = NewNode;
-        head->next = tail;
-        tail->next = nullptr;
+
+        //set the previous tail's next to the new tail/new node
+        prevTail->next = tail;
+
+        //account for heads next pointer
+        if (head->next == nullptr)
+        {
+            head->next = tail;
+            tail->prev = head;
+        }
+        else
+        {
+
+            tail->prev = prevTail;
+        }
+
+        //tail->next = NewNode;
+        //NewNode->prev = tail;
+
     }
     size++;
 
@@ -44,7 +63,10 @@ void Stack::Pop()
     {
         tail = tail->prev;
         tail->next = nullptr;
+        
+        size--;
     }
+    
 }
 
 void Stack::Remove(int val)
@@ -60,11 +82,8 @@ void Stack::Remove(int val)
             tempNext->prev = tempPrev;
 
             delete curr;
+            size--;
             
-        }
-        else
-        {
-
         }
 
         curr = curr->next;
@@ -80,4 +99,6 @@ void Stack::Print()
         std::cout << curr->data << " ";
         curr = curr->prev;
     }
+    std::cout << std::endl;
+
 }
