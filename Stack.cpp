@@ -28,8 +28,6 @@ void Stack::Push(int val)
     else
     {
         // LIFO order for stack
-        // 5 = 7 = 9 = x
-
         //keep track of current tail before inserting new node
         Node* prevTail = tail;
         tail = NewNode;
@@ -45,13 +43,8 @@ void Stack::Push(int val)
         }
         else
         {
-
             tail->prev = prevTail;
         }
-
-        //tail->next = NewNode;
-        //NewNode->prev = tail;
-
     }
     size++;
 
