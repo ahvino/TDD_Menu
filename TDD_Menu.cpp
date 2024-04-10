@@ -58,6 +58,28 @@ void CheckLists()
     stack.Remove(9);
     stack.Print();
 
+    stack.Pop();
+    stack.Print();
+
+    stack.Pop();
+    stack.Print();
+    
+    stack.Pop();
+    stack.Print();
+    
+    stack.Pop();
+    stack.Print();
+
+    stack.Pop();
+    stack.Print();
+
+
+    stack.Push(5);
+    stack.Push(7);
+    stack.Push(9);
+    stack.Print();
+
+
     std::cout << "Ending Stack..." << std::endl;
 
 }

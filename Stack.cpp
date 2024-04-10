@@ -52,21 +52,42 @@ void Stack::Push(int val)
 
 void Stack::Pop()
 {
-    if (tail != nullptr)
+    Node* curr;
+    
+    if (size > 0)
     {
-        tail = tail->prev;
-        tail->next = nullptr;
-        
-        size--;
+        if (tail == head)
+        {
+            curr = tail;
+            //delete tail;
+            tail = nullptr;
+            head = nullptr;
+            size--;
+
+        }
+
+        if (tail != nullptr)
+        {
+            curr = tail;
+            tail = tail->prev;
+            tail->next = nullptr;
+
+            //delete curr;
+            size--;
+        }
     }
+
+
     
 }
 
 void Stack::Remove(int val)
 {
     Node* curr = head;
-    while (curr->next != nullptr)
+    do
     {
+        curr = curr->next;
+
         if (curr->data == val)
         {
             Node* tempPrev = curr->prev;
@@ -74,13 +95,13 @@ void Stack::Remove(int val)
             tempPrev->next = tempNext;
             tempNext->prev = tempPrev;
 
-            delete curr;
+            //delete curr;
             size--;
-            
+            break;
+
         }
 
-        curr = curr->next;
-    }
+    } while (curr->next != nullptr);
 
 }
 
@@ -91,6 +112,9 @@ void Stack::Print()
     {
         std::cout << curr->data << " ";
         curr = curr->prev;
+
+        if (tail == nullptr) { return; }
+
     }
     std::cout << std::endl;
 
