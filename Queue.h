@@ -2,7 +2,7 @@
 
 #include "Node.h"
 
-class Stack
+class Queue
 {
 private:
     Node* head;
@@ -10,7 +10,7 @@ private:
     int size;
 
 public:
-    Stack();
+    Queue();
     void Push(int val);
     void Pop();
     void Remove(int val);

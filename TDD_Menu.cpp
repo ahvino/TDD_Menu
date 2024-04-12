@@ -24,6 +24,8 @@
 #include <memory>
 #include "MyLinkedList.h"
 #include "Stack.h"
+#include "Queue.h"
+#include "TestData.h"
 
 void StartMenu()
 {
@@ -47,41 +49,62 @@ void StartMenu()
 
 void CheckLists()
 {
+    printf("===========================================================================.\n");
+    printf("Running stack unit tests with sizes '%d', '%d', '%d'.\n",100, 1000, 10000 );
+
+    StackUnitTests(100);
+
+    StackUnitTests(1000);
+
+    StackUnitTests(10000);
+    printf("===========================================================================.\n");
+
+    printf("===========================================================================.\n");
+    printf("Running queue unit tests with sizes '%d', '%d', '%d'.\n", 100, 1000, 10000);
+
+    QueueUnitTests(100);
+
+    QueueUnitTests(1000);
+
+    QueueUnitTests(10000);
+    printf("===========================================================================.\n");
+
+    /*
     std::cout << "Starting stack..." << std::endl;
-    Stack stack;
-    stack.Push(5);
-    stack.Push(7);
-    stack.Push(9);
-    stack.Push(3);
+    Queue queue;
+    queue.Push(5);
+    queue.Push(7);
+    queue.Push(9);
+    queue.Push(3);
     
-    stack.Print();
-    stack.Remove(9);
-    stack.Print();
+    queue.Print();
+    queue.Remove(9);
+    queue.Print();
 
-    stack.Pop();
-    stack.Print();
+    queue.Pop();
+    queue.Print();
 
-    stack.Pop();
-    stack.Print();
+    queue.Pop();
+    queue.Print();
     
-    stack.Pop();
-    stack.Print();
+    queue.Pop();
+    queue.Print();
     
-    stack.Pop();
-    stack.Print();
+    queue.Pop();
+    queue.Print();
 
-    stack.Pop();
-    stack.Print();
+    queue.Pop();
+    queue.Print();
 
 
-    stack.Push(5);
-    stack.Push(7);
-    stack.Push(9);
-    stack.Print();
+    queue.Push(5);
+    queue.Push(7);
+    queue.Push(9);
+    queue.Print();
 
 
     std::cout << "Ending Stack..." << std::endl;
-
+    */
 }
 
 int main()

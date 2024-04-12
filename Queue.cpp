@@ -1,13 +1,13 @@
-#include "Stack.h"
+#include "Queue.h"
 #include <iostream>
 
 /// <summary>
-/// Stack implementation is LIFO order so 
-/// Last in, First out
-/// This means that the lasat item entered into 
-/// the stack should be the first one removed. 
+/// Queue implementation is FIFO order so 
+/// First in, First out
+/// This means that the first item entered into 
+/// the queue should be the first one removed. 
 /// </summary>
-Stack::Stack()
+Queue::Queue()
 {
     //this will be the start of the list
     head = nullptr;
@@ -15,19 +15,17 @@ Stack::Stack()
     size = 0;
 }
 
-void Stack::Push(int val)
+void Queue::Push(int val)
 {
     Node* NewNode = new Node(val);
     if (head == nullptr)
     {
         head = NewNode;
-        //head->prev = nullptr;
         tail = head;
-        //head->next = tail->next;
     }
     else
     {
-        // LIFO order for stack
+        // FIFO order for stack
         //keep track of current tail before inserting new node
         Node* prevTail = tail;
         tail = NewNode;
@@ -50,16 +48,16 @@ void Stack::Push(int val)
 
 }
 
-int Stack::Size()
+int Queue::Size()
 {
     return size;
 }
 
-void Stack::Top()
+void Queue::Top()
 {
-    if (tail != nullptr)
+    if (head != nullptr)
     {
-        std::cout << "(LIFO) Top of Stack: " << tail->data << std::endl;
+        std::cout << "(FIFO) Top of Queue: " << head->data << std::endl;
     }
     else
     {
@@ -68,27 +66,26 @@ void Stack::Top()
     }
 }
 
-void Stack::Pop()
+void Queue::Pop()
 {
     Node* curr;
-    
+
     if (size > 0)
     {
-        if (tail == head)
+        if (head == tail)
         {
-            curr = tail;
-            //delete tail;
-            tail = nullptr;
+            curr = head;
             head = nullptr;
+            tail = nullptr;
             size--;
 
         }
 
-        if (tail != nullptr)
+        if (head != nullptr)
         {
-            curr = tail;
-            tail = tail->prev;
-            tail->next = nullptr;
+            curr = head;
+            head = head->next;
+            head->prev = nullptr;
 
             //delete curr;
             size--;
@@ -96,14 +93,14 @@ void Stack::Pop()
     }
     else
     {
-        std::cout << "Stack is empty. Nothing to pop off Stack..." << std::endl;
+        std::cout << "Queue is empty. Nothing to pop off Queue..." << std::endl;
     }
 
 
-    
+
 }
 
-void Stack::Remove(int val)
+void Queue::Remove(int val)
 {
     Node* curr = head;
     do
@@ -117,7 +114,6 @@ void Stack::Remove(int val)
             tempPrev->next = tempNext;
             tempNext->prev = tempPrev;
 
-            //delete curr;
             size--;
             break;
 
@@ -127,15 +123,15 @@ void Stack::Remove(int val)
 
 }
 
-void Stack::Print()
+void Queue::Print()
 {
-    Node* curr = tail;
+    Node* curr = head;
     while (curr != nullptr)
     {
         std::cout << curr->data << " ";
-        curr = curr->prev;
+        curr = curr->next;
 
-        if (tail == nullptr) { return; }
+        if (head == nullptr) { return; }
 
     }
     std::cout << std::endl;

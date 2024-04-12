@@ -7,6 +7,9 @@
 #include <string.h>
 #include <iostream>
 #include <sstream>
+#include <stdio.h>
+#include "Stack.h"
+#include "Queue.h"
 
 
 void PrintArray(int array[], int sz)
@@ -29,7 +32,6 @@ void populateMergeSortArrays(int arraySz)
     {
         arrayToSort[i] = rand() % arraySz;
     }
-    //PrintArray(arrayToSort, arraySz);
     auto start = std::chrono::system_clock::now();
 
     MergeSort(arrayToSort, 0, arraySz - 1);
@@ -39,9 +41,88 @@ void populateMergeSortArrays(int arraySz)
 
     std::cout << "Duration of mergesort of size " << arraySz << " ";
     std::cout << "is " << duration << "'s seconds." << std::endl;
-    //PrintArray(arrayToSort, arraySz);
 
 }
+
+void QueueUnitTests(int size)
+{
+    Queue queue;
+    int* queueArr = new int[size];
+
+    srand(time(NULL));
+    int randomNum;
+    for (int i = 0; i < size; i++)
+    {
+        queueArr[i] = rand() % 100 + 1;
+    }
+
+    //measure time for inset to complete
+    std::cout << "Clocking time to insert now..." << std::endl;
+    auto t1 = std::chrono::system_clock::now();
+    for (int i = 0; i < size; i++)
+    {
+        queue.Push(queueArr[i]);
+    }
+    auto t2 = std::chrono::system_clock::now();
+    std::string duration = std::to_string(std::chrono::duration<double>(t2 - t1).count());
+    printf("Total insert time was: '%s' seconds to insert '%i' values.\n", duration.c_str(), queue.Size());
+
+
+
+    //measure time to remove queue
+    std::cout << "Clocking time to delete now..." << std::endl;
+    t1 = std::chrono::system_clock::now();
+    for (int i = 0; i < size; i++)
+    {
+        queue.Pop();
+    }
+    t2 = std::chrono::system_clock::now();
+    duration = std::to_string(std::chrono::duration<double>(t2 - t1).count());
+
+    printf("Total delete time was: '%s' seconds.\n", duration.c_str());
+
+}
+
+
+void StackUnitTests(int size)
+{
+    Stack stack;
+    int* stackArr = new int[size];
+
+    srand(time(NULL));
+    int randomNum;
+    for (int i = 0; i < size; i++)
+    {
+        stackArr[i] = rand() % 100 + 1;
+    }
+
+    //measure time for inset to complete
+    std::cout << "Clocking time to insert now..." << std::endl;
+    auto t1 = std::chrono::system_clock::now();
+    for (int i = 0; i < size; i++)
+    {
+        stack.Push(stackArr[i]);
+    }
+    auto t2 = std::chrono::system_clock::now();
+    std::string duration = std::to_string(std::chrono::duration<double>(t2 - t1).count());
+    printf("Total insert time was: '%s' seconds to insert '%i' values.\n", duration.c_str(), stack.Size());
+
+
+
+    //measure time to remove queue
+    std::cout << "Clocking time to delete now..." << std::endl;
+    t1 = std::chrono::system_clock::now();
+    for (int i = 0; i < size; i++)
+    {
+        stack.Pop();
+    }
+    t2 = std::chrono::system_clock::now();
+    duration = std::to_string(std::chrono::duration<double>(t2 - t1).count());
+
+    printf("Total delete time was: '%s' seconds.\n", duration.c_str());
+}
+
+
 
 
 void populateSelectionSortArrays(int arraySz)
@@ -55,7 +136,6 @@ void populateSelectionSortArrays(int arraySz)
     {
         arrayToSort[i] = rand() % arraySz;
     }
-    //PrintArray(arrayToSort, arraySz);
 
     auto start = std::chrono::system_clock::now();
     SelectionSort(arrayToSort, arraySz);

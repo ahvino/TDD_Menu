@@ -364,6 +364,8 @@ void MainMenu(std::string& studentID, std::string& student, bool & rerun)
         case 8:
             rerun = false;
             break;
+        case 9:
+            std::cout << "Running Stack and Queue Unit Tests... " << std::endl;
 
         default:
             std::cout << "The menu option you entered was invalid, please try again with an appropriate menu option. " << std::endl;

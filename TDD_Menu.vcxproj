@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MyLinkedList.cpp.cpp" />
+    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="TDD_Menu.cpp" />
   </ItemGroup>
@@ -136,6 +137,7 @@
     <ClInclude Include="MergeSort.h" />
     <ClInclude Include="MyLinkedList.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="SelectionSort.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="TestData.h" />
