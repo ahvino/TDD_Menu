@@ -50,6 +50,15 @@ void StartMenu()
 void CheckLists()
 {
     printf("===========================================================================.\n");
+    printf("Print stack of size 100.\n");
+    PrintStack(100);
+
+    printf("===========================================================================.\n");
+    printf("Print queue of size 100.\n");
+    PrintQueue(100);
+
+
+    printf("===========================================================================.\n");
     printf("Running stack unit tests with sizes '%d', '%d', '%d'.\n",100, 1000, 10000 );
 
     StackUnitTests(100);

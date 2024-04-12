@@ -67,8 +67,6 @@ void QueueUnitTests(int size)
     std::string duration = std::to_string(std::chrono::duration<double>(t2 - t1).count());
     printf("Total insert time was: '%s' seconds to insert '%i' values.\n", duration.c_str(), queue.Size());
 
-
-
     //measure time to remove queue
     std::cout << "Clocking time to delete now..." << std::endl;
     t1 = std::chrono::system_clock::now();
@@ -81,6 +79,53 @@ void QueueUnitTests(int size)
 
     printf("Total delete time was: '%s' seconds.\n", duration.c_str());
 
+}
+
+void PrintQueue(int size)
+{
+    Queue queue;
+    int* queueArr = new int[size];
+
+    srand(time(NULL));
+    int randomNum;
+    for (int i = 0; i < size; i++)
+    {
+        queueArr[i] = rand() % 100 + 1;
+    }
+
+    for (int i = 0; i < size; i++)
+    {
+        queue.Push(queueArr[i]);
+    }
+    auto t2 = std::chrono::system_clock::now();
+
+    //Print the Queue
+    queue.Print();
+
+
+
+}
+
+void PrintStack(int size)
+{
+    Stack stack;
+    int* stackArr = new int[size];
+
+    srand(time(NULL));
+    int randomNum;
+    for (int i = 0; i < size; i++)
+    {
+        stackArr[i] = rand() % 100 + 1;
+    }
+
+    //measure time for inset to complete
+    for (int i = 0; i < size; i++)
+    {
+        stack.Push(stackArr[i]);
+    }
+
+    //Print the Queue
+    stack.Print();
 }
 
 
@@ -106,8 +151,6 @@ void StackUnitTests(int size)
     auto t2 = std::chrono::system_clock::now();
     std::string duration = std::to_string(std::chrono::duration<double>(t2 - t1).count());
     printf("Total insert time was: '%s' seconds to insert '%i' values.\n", duration.c_str(), stack.Size());
-
-
 
     //measure time to remove queue
     std::cout << "Clocking time to delete now..." << std::endl;
