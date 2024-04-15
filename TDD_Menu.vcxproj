@@ -133,6 +133,7 @@
     <ClCompile Include="TDD_Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BST.h" />
     <ClInclude Include="MenuFunctions.h" />
     <ClInclude Include="MergeSort.h" />
     <ClInclude Include="MyLinkedList.h" />
