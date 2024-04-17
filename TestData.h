@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include "Stack.h"
 #include "Queue.h"
+#include "BST.h"
+
 
 
 void PrintArray(int array[], int sz)
@@ -209,4 +211,23 @@ void RunMergeSortsTests()
     populateMergeSortArrays(100000);
 }
 
+
+void RunBST()
+{
+    BST bst;
+
+    bst.Add(3);
+    bst.Add(5);
+    bst.Add(9);
+    bst.Add(9);
+    bst.Add(1);
+    bst.Add(4);
+    bst.Find(7);
+    bst.Find(5);
+    bst.Maximum();
+    BST temp = bst.Remove(1);
+
+    temp.InOrderTraverse(temp.GetRoot());
+
+}
 

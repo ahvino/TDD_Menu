@@ -78,49 +78,16 @@ void CheckLists()
     QueueUnitTests(10000);
     printf("===========================================================================.\n");
 
-    /*
-    std::cout << "Starting stack..." << std::endl;
-    Queue queue;
-    queue.Push(5);
-    queue.Push(7);
-    queue.Push(9);
-    queue.Push(3);
     
-    queue.Print();
-    queue.Remove(9);
-    queue.Print();
-
-    queue.Pop();
-    queue.Print();
-
-    queue.Pop();
-    queue.Print();
-    
-    queue.Pop();
-    queue.Print();
-    
-    queue.Pop();
-    queue.Print();
-
-    queue.Pop();
-    queue.Print();
-
-
-    queue.Push(5);
-    queue.Push(7);
-    queue.Push(9);
-    queue.Print();
-
-
-    std::cout << "Ending Stack..." << std::endl;
-    */
 }
+
+
 
 int main()
 {
     //StartMenu();
-
-    CheckLists();
+    RunBST();
+    //CheckLists();
 
 
     return 0;
