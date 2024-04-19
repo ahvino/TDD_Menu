@@ -222,12 +222,15 @@ void RunBST()
     bst.Add(9);
     bst.Add(1);
     bst.Add(4);
-    bst.Find(7);
-    bst.Find(5);
-    bst.Maximum();
-    BST temp = bst.Remove(1);
+    //bst.Find(7);
+    //bst.Find(5);
+    //bst.Maximum();
 
-    temp.InOrderTraverse(temp.GetRoot());
+    bst.Delete(bst.GetRoot(),7);
+    bst.Delete(bst.GetRoot(),9);
+    bst.Delete(bst.GetRoot(),3);
+
+    bst.InOrderTraverse(bst.GetRoot());
 
 }
 

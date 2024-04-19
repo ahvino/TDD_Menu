@@ -14,13 +14,13 @@
 
 TNode* BST::GetRoot()
 {
-    return root;
+    return m_root;
 }
 
 bool BST::Find(int val)
 {
     int found = false;
-    TNode* curr = root;
+    TNode* curr = m_root;
     if (curr == nullptr)
     {
         return found;
@@ -70,8 +70,8 @@ int BST::Maximum()
 {
     int val = -1;
 
-    TNode* curr = root;
-    if (root == nullptr)
+    TNode* curr = m_root;
+    if (m_root == nullptr)
     {
         printf("No maximum can be found in an empty tree.\n");
         return val;
@@ -93,20 +93,72 @@ int BST::Maximum()
     return val;
 }
 
+TNode* ValueNode(TNode* node)
+{
+    TNode* curr = node;
+    while (curr->left != nullptr)
+    {
+        curr = curr->left;
+    }
+    return curr;
+}
+
+TNode* BST::Delete(TNode* root, int data)
+{
+    bool isDeleted = false;
+
+    TNode* temp;
+
+    if (root == nullptr)
+    {
+        return root;
+    }
+    
+    if (data < root->data)
+    {
+
+        root->left = Delete(root->left, data);
+    }
+    else if (data > root->data)
+    {
+        root->right = Delete(root->right, data);
+    }
+    else
+    {
+        if (root->left == nullptr)
+        {
+            temp = root->right;
+            root = nullptr;
+            return temp;
+        }
+        else if (root->right == nullptr)
+        {
+            temp = root->left;
+            root = nullptr;
+            return temp;
+        }
+        temp = ValueNode(root->right);
+        root->data = temp->data;
+        root->right = Delete(root->right, temp->data);
+    }
+
+    return root;
+}
+
+
 /// <summary>
 /// check if the left or right equals the data first before moving forward
 /// </summary>
 /// <param name="data"></param>
 /// <returns></returns>
-BST BST::Remove(int data)
+TNode* BST::Remove(TNode* curr, int data)
 {
-    BST * temp = nullptr;
+    TNode* temp = curr;
 
-    TNode* curr = root;
-    if (root == nullptr)
+    if (curr == nullptr)
     {
         printf("Unable to remove an item from an empty tree");
-        return * temp;
+        return curr;
     }
 
     while (curr != nullptr)
@@ -135,7 +187,10 @@ BST BST::Remove(int data)
                 }
                 else
                 {
+                    //curr = nullptr;
                     curr = nullptr;
+                    //delete curr;
+                    return temp;
                 }
             }
         }
@@ -162,7 +217,6 @@ BST BST::Remove(int data)
             }
         }
     }
-    temp = this;
 }
 
 
@@ -170,15 +224,15 @@ void BST::Add(int data)
 {
     TNode* node = new TNode(data);
 
-    if (root == nullptr)
+    if (m_root == nullptr)
     {
-        root = node;
+        m_root = node;
         return;
     }
 
     else
     {
-        TNode* curr = root;
+        TNode* curr = m_root;
         while (curr != nullptr)
         {
             if (data == curr->data)
@@ -225,8 +279,9 @@ void BST::InOrderTraverse(TNode* curr)
     }
     else
     {
+        
         InOrderTraverse(curr->left);
-        std::cout << curr->data << std::endl;
+        if(curr != nullptr)  std::cout << curr->data << std::endl;
         InOrderTraverse(curr->right);
     }
 }

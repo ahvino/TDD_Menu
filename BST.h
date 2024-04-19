@@ -12,14 +12,15 @@ struct TNode
 class BST
 {
     private:
-        TNode* root;
+        TNode* m_root;
 
     public:
-        BST() : root(nullptr) {};
+        BST() : m_root(nullptr) {};
         void Add(int data);
         void InOrderTraverse(TNode* curr);
         TNode * GetRoot();
-        BST Remove(int data);
+        TNode* Remove(TNode* root,int data);
+        TNode* Delete(TNode* root,int data);
         int Maximum();
         bool Find(int data);
 };
