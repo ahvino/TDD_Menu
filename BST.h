@@ -16,7 +16,7 @@ class BST
 
     public:
         BST() : m_root(nullptr) {};
-        void Add(int data);
+        void Add(int data, bool debug);
         void InOrderTraverse(TNode* curr);
         TNode * GetRoot();
         TNode* Remove(TNode* root,int data);

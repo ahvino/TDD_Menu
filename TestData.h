@@ -212,25 +212,115 @@ void RunMergeSortsTests()
 }
 
 
-void RunBST()
+void BSTInsert10000()
 {
+    int* arrayToSort = new int[10000];
+
+    srand(time(NULL));
     BST bst;
 
-    bst.Add(3);
-    bst.Add(5);
-    bst.Add(9);
-    bst.Add(9);
-    bst.Add(1);
-    bst.Add(4);
-    //bst.Find(7);
-    //bst.Find(5);
-    //bst.Maximum();
+    for (int i = 0; i < 10000; i++)
+    {
+        arrayToSort[i] = rand() % 10000;
+    }
 
-    bst.Delete(bst.GetRoot(),7);
-    bst.Delete(bst.GetRoot(),9);
-    bst.Delete(bst.GetRoot(),3);
+    auto start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < 10000; i++)
+    {
+        bst.Add(arrayToSort[i], true);
+    }
+    auto end = std::chrono::system_clock::now();
+
+    bst.InOrderTraverse(bst.GetRoot());
+    std::string duration = std::to_string(std::chrono::duration<double>(end - start).count());
+
+    std::cout << "Duration of BST inserts of size " << 10000 << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+    bst.Maximum();
+}
+
+
+void BSTInsertAndDeleteTest()
+{
+    int* arrayToSort = new int[1000];
+
+    srand(time(NULL));
+    BST bst;
+
+    for (int i = 0; i < 1000; i++)
+    {
+        arrayToSort[i] = rand() % 1000;
+    }
+
+    auto start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < 1000; i++)
+    {
+        bst.Add(arrayToSort[i], true);
+    }
+    auto end = std::chrono::system_clock::now();
+
+    bst.InOrderTraverse(bst.GetRoot());
+    std::string duration = std::to_string(std::chrono::duration<double>(end - start).count());
+
+    std::cout << "Duration of BST inserts of size " << 1000 << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+
+    start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < 1000; i++)
+    {
+        bst.Delete(bst.GetRoot(), arrayToSort[i]);
+    }
+    end = std::chrono::system_clock::now();
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+
 
     bst.InOrderTraverse(bst.GetRoot());
 
+    std::cout << "Duration of BST deletes of size " << 1000 << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+}
+
+void BSTInsertsTests(int arrSz)
+{
+    int* arrayToSort = new int[arrSz];
+
+    srand(time(NULL));
+    BST bst;
+
+    for (int i = 0; i < arrSz; i++)
+    {
+        arrayToSort[i] = rand() % arrSz;
+    }
+
+    auto start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < arrSz; i++)
+    {
+        bst.Add(arrayToSort[i], false);
+    }
+    auto end = std::chrono::system_clock::now();
+
+    std::string duration = std::to_string(std::chrono::duration<double>(end - start).count());
+
+    std::cout << "Duration of BST inserts of size " << arrSz << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+}
+
+void RunBST()
+{
+    //BSTInsertsTests(100);
+    //BSTInsertsTests(1000);
+    //BSTInsertsTests(10000);
+    //BSTInsertsTests(100000);
+    //
+    BSTInsert10000();
+    //
+    BSTInsertAndDeleteTest();
 }
 

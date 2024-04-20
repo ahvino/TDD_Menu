@@ -220,7 +220,7 @@ TNode* BST::Remove(TNode* curr, int data)
 }
 
 
-void BST::Add(int data)
+void BST::Add(int data, bool debug)
 {
     TNode* node = new TNode(data);
 
@@ -237,7 +237,11 @@ void BST::Add(int data)
         {
             if (data == curr->data)
             {
-                printf("The tree already contains a node with the value '%i' \n", data);
+                if (debug)
+                {
+                    printf("The tree already contains a node with the value '%i' \n", data);
+
+                }
                 
                 return;
             }
