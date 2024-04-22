@@ -11,7 +11,8 @@
 #include "Stack.h"
 #include "Queue.h"
 #include "BST.h"
-
+#include <list>
+#include <vector>
 
 
 void PrintArray(int array[], int sz)
@@ -45,6 +46,36 @@ void populateMergeSortArrays(int arraySz)
     std::cout << "is " << duration << "'s seconds." << std::endl;
 
 }
+
+
+
+
+std::vector<std::string> GenerateRandomString(int numOfstrs)
+{
+    std::vector<std::string> names;
+    char characters[] = "abcdefghijklmnopqrstuvwxyz";
+    
+    for (int i = 0; i < numOfstrs; i++)
+    {
+        //random name of length 3 or more;
+        int length = rand() % 15 + 3;
+
+        std::string name = "";
+
+        int randIndex = 0;
+
+        for (int i = 0; i < length; i++)
+        {
+            randIndex = rand() % 26;
+            name += characters[randIndex];
+        }
+        //printf("Name is '%s'\n", name.c_str());
+        names.push_back(name);
+    }
+
+    return names;
+}
+
 
 void QueueUnitTests(int size)
 {

@@ -22,10 +22,15 @@
 
 #include "MenuFunctions.h"
 #include <memory>
+#include <stdlib.h>
 #include "MyLinkedList.h"
 #include "Stack.h"
 #include "Queue.h"
 #include "TestData.h"
+#include "HashTable.h"
+#include <vector>
+#include <unordered_set>
+#include <functional>
 
 void StartMenu()
 {
@@ -82,11 +87,447 @@ void CheckLists()
 }
 
 
+void HashCompare()
+{
+    std::vector<std::string> names = GenerateRandomString(100);
+
+    HashTable ht1(names.size() * 10);
+    auto start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht1.Insert(names[i]);
+    }
+    auto end = std::chrono::system_clock::now();
+
+    std::string duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Insert of size " << 100 << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+
+    std::unordered_set<std::string> ht2;
+
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht2.insert(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Insert of size using built in hash" << 100 << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+}
+
+void DisplayAndFind100()
+{
+    std::vector<std::string> names = GenerateRandomString(100);
+
+    HashTable ht1(names.size() * 10);
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht1.Insert(names[i]);
+    }
+
+    auto start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht1.FindValue(names[i]);
+    }
+
+    auto end = std::chrono::system_clock::now();
+
+    auto duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Find of size " << 100 << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+}
+
+
+void HashTests(int dataSize)
+{
+    std::vector<std::string> names = GenerateRandomString(dataSize);
+
+
+    // INSERTS================================================================
+    HashTable ht(names.size() * 10);
+    auto start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Insert(names[i]);
+    }
+    auto end = std::chrono::system_clock::now();
+
+    std::string duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Insert of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+
+    std::unordered_set<std::string> ht2;
+
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht2.insert(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Insert using built hash of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+    // FIND================================================================
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.FindValue(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Find of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht2.find(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Find using built in hash function of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+    // DELETE================================================================
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Delete(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Delete of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht2.erase(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Erase using built in hash function of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+}
+
+
+void Hash100()
+{
+
+    std::vector<std::string> names = GenerateRandomString(100);
+
+
+    // INSERTS================================================================
+    HashTable ht(names.size() * 10);
+    auto start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Insert(names[i]);
+    }
+    auto end = std::chrono::system_clock::now();
+
+    std::string duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Insert of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+
+    std::unordered_set<std::string> ht2;
+
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht2.insert(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Insert using built hash of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+    // FIND================================================================
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.FindValue(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Find of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht2.find(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Find using built in hash function of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+    // DELETE================================================================
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Delete(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Delete of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht2.erase(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Erase using built in hash function of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+
+}
+
+void Hash1000()
+{
+    std::vector<std::string> names = GenerateRandomString(1000);
+
+    HashTable ht(names.size() * 10);
+
+    auto start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Insert(names[i]);
+    }
+
+    auto end = std::chrono::system_clock::now();
+
+    std::string duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Insert of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+
+    std::unordered_set<std::string> ht2;
+
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht2.insert(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Insert using built hash of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+    //ht.Display();
+}
+
+
+
+void Hash10000()
+{
+    std::vector<std::string> names = GenerateRandomString(10000);
+
+    HashTable ht(names.size() * 10);
+
+    auto start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Insert(names[i]);
+    }
+
+    auto end = std::chrono::system_clock::now();
+
+    std::string duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Insert of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+
+
+    std::unordered_set<std::string> ht2;
+
+    start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht2.insert(names[i]);
+    }
+    end = std::chrono::system_clock::now();
+
+    duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Insert using built hash of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+    //ht.Display();
+}
+
+void RunHashSetup()
+{
+    std::vector<std::string> names = GenerateRandomString(5);
+
+    HashTable ht(names.size() * 10);
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Insert(names[i]);
+    }
+
+    //ht.Display();
+}
+
+void BasicInsertRuns()
+{
+    Hash100();
+    Hash1000();
+    Hash10000();
+}
+
+void BasicDeleteRuns()
+{
+    Hash100();
+    Hash1000();
+    Hash10000();
+}
+
+
+void Delete100()
+{
+    std::vector<std::string> names = GenerateRandomString(100);
+
+    HashTable ht(names.size() * 10);
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Insert(names[i]);
+    }
+
+    ht.Display();
+    auto start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Delete(names[i]);
+    }
+    auto end = std::chrono::system_clock::now();
+
+    auto duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Delete of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+    ht.Display();
+}
+
+
+void Delete1000()
+{
+    std::vector<std::string> names = GenerateRandomString(1000);
+
+    HashTable ht(names.size() * 10);
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Insert(names[i]);
+    }
+
+    ht.Display();
+    auto start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Delete(names[i]);
+    }
+    auto end = std::chrono::system_clock::now();
+
+    auto duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Delete of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+    ht.Display();
+}
+
+
+void Delete10000()
+{
+    std::vector<std::string> names = GenerateRandomString(10000);
+
+    HashTable ht(names.size() * 10);
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Insert(names[i]);
+    }
+
+    ht.Display();
+    auto start = std::chrono::system_clock::now();
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Delete(names[i]);
+    }
+    auto end = std::chrono::system_clock::now();
+
+    auto duration = std::to_string(std::chrono::duration<double>(end - start).count());
+    std::cout << "Duration of Delete of size " << names.size() << " ";
+    std::cout << "is " << duration << "'s seconds." << std::endl;
+    ht.Display();
+}
+
+void BasicFindRuns()
+{
+    Hash100();
+    Hash1000();
+    Hash10000();
+}
+
+
+void ShowcaseCollisions()
+{
+    std::vector<std::string> names = GenerateRandomString(1000);
+
+    HashTable ht(names.size() * 3);
+
+    for (int i = 0; i < names.size(); i++)
+    {
+        ht.Insert(names[i]);
+    }
+
+    ht.Display();
+
+}
+
 
 int main()
 {
     //StartMenu();
-    RunBST();
+    //HashCompare();
+    //DisplayAndFind100();
+    //BasicInsertRuns();
+    printf("====================================\n");
+    HashTests(100);
+    printf("====================================\n");
+    HashTests(1000);
+    printf("====================================\n");
+    HashTests(10000);
+    printf("====================================\n");
+
+    ShowcaseCollisions();
+    //RunHashSetup();
     //CheckLists();
 
 
